@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 
 import BgGlobal from "./global/background";
-import ItemOutlet from "./global/outlet";
+import ItemOutlet from "./global/itemoutlet";
 
 import Home from "./page/home";
 import RegisterLogin from "./page/register&login";
