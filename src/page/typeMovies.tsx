@@ -42,10 +42,10 @@ const MovieCard = ({
 };
 
 const typeLabels: Record<string, { label: string; color: string }> = {
-  single: { label: "Phim Lẻ", color: "from-amber-500 to-amber-600" },
-  series: { label: "Series", color: "from-purple-500 to-purple-600" },
-  tvshow: { label: "TV Show", color: "from-blue-500 to-blue-600" },
-  movie: { label: "Phim", color: "from-red-500 to-red-600" },
+  single: { label: "singles", color: "from-amber-500 to-amber-600" },
+  series: { label: "series", color: "from-purple-500 to-purple-600" },
+  tvshow: { label: "movies", color: "from-blue-500 to-blue-600" },
+  movie: { label: "tvshow", color: "from-red-500 to-red-600" },
 };
 
 function TypeMovies() {
@@ -55,7 +55,7 @@ function TypeMovies() {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const getImageUrl = (path?: string) => {
     if (!path) return "";
@@ -79,9 +79,8 @@ function TypeMovies() {
         setLoading(true);
         setError(null);
         const data = await get_movies_by_type(type, currentPage);
-
         if (isActive) {
-          setMoviesData(data);
+          setMoviesData(data.data);
         }
       } catch (err) {
         if (isActive) {

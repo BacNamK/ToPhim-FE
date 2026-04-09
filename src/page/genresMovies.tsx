@@ -83,8 +83,9 @@ function GenresMovies() {
 
         // Fetch movies
         const data = await get_movies_by_genre(genreId, currentPage);
+        console.log(data);
         if (isActive) {
-          setMoviesData(data);
+          setMoviesData(data.data);
         }
       } catch (err) {
         if (isActive) {
@@ -165,7 +166,7 @@ function GenresMovies() {
 
                 {/* Pagination */}
                 {moviesData.total_page > 1 && (
-                  <div className="flex items-center justify-center gap-4 py-8">
+                  <div className="flex items-center justify-center gap-4 py-8 bg-amber-200">
                     <button
                       onClick={handlePrevPage}
                       disabled={currentPage === 1}

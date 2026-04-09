@@ -26,10 +26,8 @@ export type EpisodeItem = {
 
 // Genre Item
 export type GenreItem = {
-  _id: string;
+  id: string;
   name: string;
-  createdAt?: string;
-  updatedAt?: string;
 };
 
 // API Response cho movies

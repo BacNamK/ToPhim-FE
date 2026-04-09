@@ -100,7 +100,6 @@ const Home = () => {
     const fetchMovies = async () => {
       const response = await movies_slide();
       if (response?.data?.movies) {
-        console.log("Dữ liệu nhận được:", response.data.movies);
         setValue(response.data.movies);
       }
     };

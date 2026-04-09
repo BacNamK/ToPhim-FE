@@ -7,6 +7,44 @@ import { search_movies, get_all_genres } from "../api/movies";
 import type { MovieItem, GenreItem } from "../types";
 
 const Navbar = () => {
+  const genresData = [
+    {
+      _id: "69d361366732faecf486ec34",
+      name: "horror",
+    },
+    {
+      _id: "69d361366732faecf486ec35",
+      name: "romance",
+    },
+    {
+      _id: "69d361366732faecf486ec36",
+      name: "sci-fi",
+    },
+    {
+      _id: "69d361366732faecf486ec30",
+      name: "adventure",
+    },
+    {
+      _id: "69d361366732faecf486ec31",
+      name: "comedy",
+    },
+    {
+      _id: " 69d361366732faecf486ec32",
+      name: "drama",
+    },
+    {
+      _id: "69d361366732faecf486ec33",
+      name: "fantasy",
+    },
+    {
+      _id: "69d361366732faecf486ec29",
+      name: "action",
+    },
+    {
+      _id: "69d361366732faecf486ec28",
+      name: "thriller",
+    },
+  ];
   const [genresOpen, setGenresOpen] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
   const [displayName, setDisplayName] = useState<string | null>(null);
@@ -14,7 +52,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<MovieItem[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [genres, setGenres] = useState<GenreItem[]>([]);
+  const [genres, setGenres] = useState<any[]>([genresData]);
 
   const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -91,8 +129,9 @@ const Navbar = () => {
     const timeoutId = setTimeout(async () => {
       try {
         const response = await search_movies(searchQuery);
-        setSearchResults(response.movies);
+        setSearchResults(response.data.movies || []);
         setIsDropdownOpen(true);
+        console.log("Search results:", response.data);
       } catch (error) {
         console.error("Search error:", error);
         setSearchResults([]);
@@ -164,7 +203,7 @@ const Navbar = () => {
           </button>
           {genresOpen && (
             <div className="absolute left-0 mt-2 w-44 rounded-2xl bg-white shadow-lg border border-gray-200 z-50">
-              {genres.map((genre) => (
+              {genresData.map((genre) => (
                 <button
                   key={genre._id}
                   type="button"
@@ -203,12 +242,6 @@ const Navbar = () => {
           className="block hover:p-2 duration-300 rounded-2xl hover:bg-gray-100"
         >
           Tv Show
-        </Link>
-        <Link
-          to={""}
-          className="block hover:p-2 duration-300 rounded-2xl hover:bg-gray-100"
-        >
-          Quốc gia
         </Link>
       </div>
 
