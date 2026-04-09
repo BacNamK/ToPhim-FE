@@ -1,0 +1,51 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&family=TASA+Orbiter:wght@400..800&display=swap");
+@import "tailwindcss";
+
+@source "../../../**/*.{html,tsx}";
+
+@layer utilities {
+  /* Targets the entire scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 2px; /* Adjust width as needed */
+  }
+
+  /* Targets the scrollbar track (background) */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-white rounded-full; /* Use Tailwind utilities here */
+  }
+
+  /* Targets the scrollbar thumb (draggable handle) */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full; /* Use Tailwind utilities here */
+  }
+
+  /* Optional: Hover state for the thumb */
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-white;
+  }
+}
+
+@theme {
+  --font-nunito: "Nunito", "sans-serif";
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Hide scrollbar while allowing scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+
+}
