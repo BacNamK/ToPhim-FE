@@ -73,8 +73,7 @@ function Manage() {
         const data = await get_movies(moviesPage);
 
         if (isActive) {
-          setMoviesData(data);
-          console.log(data);
+          setMoviesData(data.data);
         }
       } catch (e) {
         if (isActive) {
@@ -136,8 +135,8 @@ function Manage() {
   const filteredMoviesData = moviesData
     ? {
         ...moviesData,
-        movies: moviesData.movies.filter((movie) =>
-          movie.name?.toLowerCase().includes(searchQuery.toLowerCase()),
+        movies: (moviesData.movies || []).filter((movie) =>
+          movie.name?.toLowerCase().includes((searchQuery || "").toLowerCase()),
         ),
       }
     : null;
@@ -145,12 +144,14 @@ function Manage() {
   const filteredUsersData = usersData
     ? {
         ...usersData,
-        users: usersData.users.filter(
+        users: (usersData.users || []).filter(
           (user) =>
             user.username
               .toLowerCase()
-              .includes(searchQueryUsers.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQueryUsers.toLowerCase()),
+              .includes((searchQueryUsers || "").toLowerCase()) ||
+            user.email
+              .toLowerCase()
+              .includes((searchQueryUsers || "").toLowerCase()),
         ),
       }
     : null;

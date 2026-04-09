@@ -28,12 +28,8 @@ const RegisterLogin = () => {
         type: "success",
         message: response.data?.message || "Đăng nhập thành công!",
       });
-      const displayName =
-        response.data?.username || response.data?.user?.username || loginEmail.trim();
-      localStorage.setItem(
-        "tophim_user",
-        JSON.stringify({ displayName }),
-      );
+
+      localStorage.setItem("tophim_user", response.data?.username);
       window.dispatchEvent(new Event("tophim_user_updated"));
       navigate("/");
     } catch (error: any) {
@@ -58,6 +54,7 @@ const RegisterLogin = () => {
         email: registerEmail.trim(),
         password: registerPassword,
       });
+      console.log(response);
       setStatus({
         type: "success",
         message: response.data?.message || "Đăng kí thành công!",
@@ -206,7 +203,9 @@ const RegisterLogin = () => {
                     type="password"
                     placeholder="Tối thiểu 8 ký tự"
                     value={registerPassword}
-                    onChange={(event) => setRegisterPassword(event.target.value)}
+                    onChange={(event) =>
+                      setRegisterPassword(event.target.value)
+                    }
                     className="h-11 rounded-xl border border-black/10 px-4 outline-none focus:border-black"
                   />
                 </div>

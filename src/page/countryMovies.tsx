@@ -135,7 +135,7 @@ function CountryMovies() {
           <div>
             <h1 className="text-3xl font-bold text-white">Phim từ {country}</h1>
             <p className="text-white/60 text-sm mt-1">
-              {moviesData
+              {moviesData?.movies
                 ? `Tổng cộng ${moviesData.movies.length} phim`
                 : "Danh sách phim"}
             </p>
@@ -171,7 +171,7 @@ function CountryMovies() {
         {/* Movies Grid */}
         {!loading && !error && moviesData && (
           <>
-            {moviesData.movies.length > 0 ? (
+            {moviesData.movies && moviesData.movies.length > 0 ? (
               <>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
                   {moviesData.movies.map((movie) => (

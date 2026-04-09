@@ -16,7 +16,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [genres, setGenres] = useState<GenreItem[]>([]);
 
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const getImageUrl = (path?: string) => {
     if (!path) return "";
@@ -46,12 +46,7 @@ const Navbar = () => {
         setDisplayName(null);
         return;
       }
-      try {
-        const user = JSON.parse(raw) as { displayName?: string };
-        setDisplayName(user?.displayName ?? null);
-      } catch {
-        setDisplayName(null);
-      }
+      setDisplayName(raw ?? null);
     };
 
     loadUser();

@@ -48,30 +48,32 @@ const CategoryRow = ({
   title: string;
   items: MovieItem[];
   getImageUrl: (p?: string) => string;
-}) => (
-  <div className="w-full h-72 flex gap-4 bg-white/5 border border-white/10 rounded-4xl p-3 backdrop-blur-sm shadow-2xl">
-    <div className="w-60 h-full bg-amber-400/10 rounded-2xl flex items-center justify-center border border-amber-400/5">
-      <h2 className=" text-3xl font-black text-amber-300 ">{title}</h2>
+}) => {
+  return (
+    <div className="w-full h-72 flex gap-4 bg-white/5 border border-white/10 rounded-4xl p-3 backdrop-blur-sm shadow-2xl">
+      <div className="w-60 h-full bg-amber-400/10 rounded-2xl flex items-center justify-center border border-amber-400/5">
+        <h2 className=" text-3xl font-black text-amber-300 ">{title}</h2>
+      </div>
+      <div className="flex flex-1 gap-5 overflow-x-auto custom-scrollbar pb-1 px-2">
+        {items.length > 0 ? (
+          items
+            .slice(0, 5)
+            .map((movie) => (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                getImageUrl={getImageUrl}
+              />
+            ))
+        ) : (
+          <div className="flex-1 flex items-center justify-center text-white/20 italic text-sm">
+            Chưa có phim ở mục này
+          </div>
+        )}
+      </div>
     </div>
-    <div className="flex flex-1 gap-5 overflow-x-auto custom-scrollbar pb-1 px-2">
-      {items.length > 0 ? (
-        items
-          .slice(0, 5)
-          .map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              getImageUrl={getImageUrl}
-            />
-          ))
-      ) : (
-        <div className="flex-1 flex items-center justify-center text-white/20 italic text-sm">
-          Chưa có phim ở mục này
-        </div>
-      )}
-    </div>
-  </div>
-);
+  );
+};
 
 const Home = () => {
   const [movies, setMovies] = useState<MovieItem[]>([]);
@@ -97,8 +99,9 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await movies_slide();
-      if (response && response.movies) {
-        setValue(response.movies);
+      if (response?.data?.movies) {
+        console.log("Dữ liệu nhận được:", response.data.movies);
+        setValue(response.data.movies);
       }
     };
     fetchMovies();
@@ -114,7 +117,7 @@ const Home = () => {
         const response = await movies_top();
         if (!isActive) return;
 
-        setMovies(response.movies || []);
+        setMovies(response.data.movies || []);
         setActiveIndex(0);
       } catch (e) {
         if (!isActive) return;
