@@ -196,8 +196,10 @@ const Navbar = () => {
         <div className="relative">
           <button
             type="button"
-            onClick={() => setGenresOpen((prev) => !prev)}
-            className="block hover:p-2 duration-300 rounded-2xl hover:bg-gray-100"
+            onClick={() => {
+              setGenresOpen((prev) => !prev);
+            }}
+            className={`block hover:p-2 duration-300 rounded-2xl hover:bg-gray-100`}
           >
             Thể loại
           </button>

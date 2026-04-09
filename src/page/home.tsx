@@ -57,7 +57,7 @@ const CategoryRow = ({
       <div className="flex flex-1 gap-5 overflow-x-auto custom-scrollbar pb-1 px-2">
         {items.length > 0 ? (
           items
-            .slice(0, 5)
+            .slice(0, 6)
             .map((movie) => (
               <MovieCard
                 key={movie._id}
@@ -99,6 +99,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await movies_slide();
+      console.log(response.data.movies);
       if (response?.data?.movies) {
         setValue(response.data.movies);
       }

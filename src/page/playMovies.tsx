@@ -59,7 +59,7 @@ const PlayMovies = () => {
     fetchEpisodes();
   }, [movie._id, movie.type]);
 
-  const hasEpisodes = episodes.length > 0;
+  const hasEpisodes = episodes?.length > 0;
 
   // Nếu không tìm thấy movie hoặc không có episodes và đang cố tình truy cập phase play (logic phòng ngừa)
   useEffect(() => {

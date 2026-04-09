@@ -59,7 +59,7 @@ const ListMovies = ({
   }
 
   return (
-    <div className=" w-full h-full p-4">
+    <div className=" w-full h-full p-4 content-center">
       <div className={`w-full h-full  z-10 ${isDetail ? "" : "hidden"}`}>
         <DetailMovies
           detailmovie={value}
@@ -68,7 +68,7 @@ const ListMovies = ({
         />
       </div>
       <div
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-10 gap-4 ${isDetail ? "hidden" : ""}`}
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-8 gap-6 ${isDetail ? "hidden" : ""}`}
       >
         {data.movies.map((movie) => {
           const posterUrl = getImageUrl(movie.poster);
